@@ -4,7 +4,7 @@
 package jp.seraphr.common;
 
 /**
- *
+ * Not演算を行う{@linkplain Predicate}型です。
  */
 public class NotPredicate<T> implements Predicate<T> {
     private NotPredicate(Predicate<T> aBase) {
