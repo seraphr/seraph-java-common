@@ -14,8 +14,8 @@ public abstract class Option<_Elem> {
      * 引数に与えられたオブジェクトを元にOptionのインスタンスを返します。
      * 引数に与えられた値がnullであれば{@linkplain None}のインスタンスを、そうでなければ{@linkplain Some}のインスタンスを返します。
      *
-     * @param aElement
-     * @return
+     * @param aElement 元となるオブジェクト
+     * @return aElementに対応したOptionのインスタンス
      */
     public static <_E> Option<_E> some(_E aElement) {
         if (aElement == null)
@@ -24,6 +24,11 @@ public abstract class Option<_Elem> {
             return new Some<_E>(aElement);
     }
 
+    /**
+     * {@linkplain None}のインスタンスを返します。
+     *
+     * @return Noneのインスタンス
+     */
     @SuppressWarnings("unchecked")
     public static <_E> Option<_E> none() {
         return (Option<_E>) NONE;
