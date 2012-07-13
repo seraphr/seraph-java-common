@@ -44,6 +44,24 @@ public abstract class Option<_Elem> {
     }
 
     /**
+     * このオブジェクトなNoneであればtrueを返します。
+     *
+     * @see #isSome()
+     * @return
+     */
+    public abstract boolean isNone();
+
+    /**
+     * このオブジェクトがSomeであればtrueを返します。
+     *
+     * @see Option#isNone()
+     * @return
+     */
+    public boolean isSome(){
+        return !isNone();
+    }
+
+    /**
      * このオブジェクトが{@linkplain Some}のインスタンスであれば、ラップしている値を、そうでなければ引数に与えられた値を返します。
      *
      * @param aElse このオブジェクトが{@linkplain None}である場合に返す値
@@ -80,6 +98,11 @@ public abstract class Option<_Elem> {
         public void match(OptionMatcher<_E> aMatcher) {
             aMatcher.matchSome(mElement);
         }
+
+        @Override
+        public boolean isNone() {
+            return false;
+        }
     }
 
     /**
@@ -97,6 +120,11 @@ public abstract class Option<_Elem> {
         @Override
         public void match(OptionMatcher<_E> aMatcher) {
             aMatcher.matchNone();
+        }
+
+        @Override
+        public boolean isNone() {
+            return true;
         }
     }
 }
