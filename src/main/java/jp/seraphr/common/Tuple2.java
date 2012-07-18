@@ -3,8 +3,10 @@ package jp.seraphr.common;
 /**
  * 2つの値の組み合わせを表します。
  *
- * @param <_Element1> 一つ目の値の型
- * @param <_Element2> 二つ目の値の型
+ * @param <_Element1>
+ *            一つ目の値の型
+ * @param <_Element2>
+ *            二つ目の値の型
  */
 public class Tuple2<_Element1, _Element2> {
     public Tuple2(_Element1 aElement1, _Element2 aElement2) {
@@ -19,7 +21,7 @@ public class Tuple2<_Element1, _Element2> {
      * @param aElement2
      * @return 生成されたインスタンス
      */
-    public static <_E1, _E2> Tuple2<_E1, _E2> create(_E1 aElement1, _E2 aElement2){
+    public static <_E1, _E2> Tuple2<_E1, _E2> create(_E1 aElement1, _E2 aElement2) {
         return new Tuple2<_E1, _E2>(aElement1, aElement2);
     }
 
@@ -49,13 +51,16 @@ public class Tuple2<_Element1, _Element2> {
 
     @Override
     public boolean equals(Object aObj) {
-        if(!(aObj instanceof Tuple2))
+        if (!(aObj instanceof Tuple2))
             return false;
 
-        Tuple2<?, ?> tObj = (Tuple2<?, ?>)aObj;
+        Tuple2<?, ?> tObj = (Tuple2<?, ?>) aObj;
 
         return tObj.get1().equals(this.get1()) && tObj.get2().equals(this.get2());
     }
 
-
+    @Override
+    public String toString() {
+        return "(" + get1().toString() + "," + get2().toString() + ")";
+    }
 }

@@ -1,20 +1,21 @@
 package jp.seraphr.common;
 
 /**
- * 値を持たない可能性がある型を表します。
- * 値を持たない場合、{@linkplain None}型のインスタンスでそれを表します。
+ * 値を持たない可能性がある型を表します。 値を持たない場合、{@linkplain None}型のインスタンスでそれを表します。
  *
- * @param <_Elem> 値の型
+ * @param <_Elem>
+ *            値の型
  */
 public abstract class Option<_Elem> {
 
     private static None<?> NONE = new None<Object>();
 
     /**
-     * 引数に与えられたオブジェクトを元にOptionのインスタンスを返します。
-     * 引数に与えられた値がnullであれば{@linkplain None}のインスタンスを、そうでなければ{@linkplain Some}のインスタンスを返します。
+     * 引数に与えられたオブジェクトを元にOptionのインスタンスを返します。 引数に与えられた値がnullであれば{@linkplain None}
+     * のインスタンスを、そうでなければ{@linkplain Some}のインスタンスを返します。
      *
-     * @param aElement 元となるオブジェクト
+     * @param aElement
+     *            元となるオブジェクト
      * @return aElementに対応したOptionのインスタンス
      */
     public static <_E> Option<_E> some(_E aElement) {
@@ -39,7 +40,7 @@ public abstract class Option<_Elem> {
      *
      * @return ラップしている値 もしくはnull
      */
-    public _Elem getOrNull(){
+    public _Elem getOrNull() {
         return getOrElse(null);
     }
 
@@ -57,23 +58,27 @@ public abstract class Option<_Elem> {
      * @see Option#isNone()
      * @return
      */
-    public boolean isSome(){
+    public boolean isSome() {
         return !isNone();
     }
 
     /**
      * このオブジェクトが{@linkplain Some}のインスタンスであれば、ラップしている値を、そうでなければ引数に与えられた値を返します。
      *
-     * @param aElse このオブジェクトが{@linkplain None}である場合に返す値
+     * @param aElse
+     *            このオブジェクトが{@linkplain None}である場合に返す値
      * @return ラップしている値、もしくは引数に与えられた値
      */
     public abstract _Elem getOrElse(_Elem aElse);
 
     /**
-     * このオブジェクトが{@linkplain Some}のインスタンスであれば{@linkplain OptionMatcher#matchSome(Object)}を呼び出します。
-     * そうでなければ、{@linkplain OptionMatcher#matchNone()}を呼び出します。
+     * このオブジェクトが{@linkplain Some}のインスタンスであれば
+     * {@linkplain OptionMatcher#matchSome(Object)}を呼び出します。 そうでなければ、
+     * {@linkplain OptionMatcher#matchNone()}を呼び出します。
      *
-     * @param aMatcher {@linkplain OptionMatcher#matchSome(Object)}・{@linkplain OptionMatcher#matchNone()}の呼び出しレシーバとなるオブジェクト
+     * @param aMatcher
+     *            {@linkplain OptionMatcher#matchSome(Object)}・
+     *            {@linkplain OptionMatcher#matchNone()}の呼び出しレシーバとなるオブジェクト
      */
     public abstract void match(OptionMatcher<_Elem> aMatcher);
 
@@ -103,6 +108,26 @@ public abstract class Option<_Elem> {
         public boolean isNone() {
             return false;
         }
+
+        @Override
+        public int hashCode() {
+            return getOrNull().hashCode();
+        }
+
+        @Override
+        public boolean equals(Object aObj) {
+            if (!(aObj instanceof Some))
+                return false;
+
+            Some<?> tSome = (Some<?>) aObj;
+
+            return tSome.getOrNull().equals(getOrNull());
+        }
+
+        @Override
+        public String toString() {
+            return "Some(" + getOrNull() + ")";
+        }
     }
 
     /**
@@ -125,6 +150,11 @@ public abstract class Option<_Elem> {
         @Override
         public boolean isNone() {
             return true;
+        }
+
+        @Override
+        public String toString() {
+            return "None";
         }
     }
 }
