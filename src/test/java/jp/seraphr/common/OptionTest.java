@@ -97,4 +97,32 @@ public class OptionTest {
         assertThat(tResult, is(equalTo("abcd")));
 
     }
+
+    @Test
+    public void testNoneWithMap(){
+        Option<Integer> tNone = Option.none();
+
+        Option<String> tResult = tNone.map(new Converter<Integer, String>() {
+            @Override
+            public String convert(Integer aSource) {
+                return aSource.toString();
+            }
+        });
+        assertThat(tResult, is(equalTo(Option.<String>none())));
+    }
+
+    @Test
+    public void testSomeWithMap(){
+        Option<String> tSome = Option.some("abcd");
+
+        Option<String> tResult = tSome.map(new Converter<String, String>(){
+            @Override
+            public String convert(String aSource) {
+                return aSource + aSource;
+            }
+        });
+
+        assertThat(tResult, is(equalTo(Option.some("abcdabcd"))));
+
+    }
 }
