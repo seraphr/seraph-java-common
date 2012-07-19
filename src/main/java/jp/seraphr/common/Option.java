@@ -83,6 +83,16 @@ public abstract class Option<_Elem> {
     public abstract void match(OptionMatcher<_Elem> aMatcher);
 
     /**
+     * このオブジェクトが{@linkplain Some}のインスタンスであれば
+     * {@linkplain ReturnableOptionMatcher#matchSome(Object)}を呼び出します。 そうでなければ、
+     * {@linkplain ReturnableOptionMatcher#matchNone()}を呼び出します。
+     *
+     * @param aMatcher コールバックオブジェクト
+     * @return {@linkplain ReturnableOptionMatcher#matchSome(Object)}もしくは{@linkplain ReturnableOptionMatcher#matchNone()}の返値
+     */
+    public abstract <_Result> _Result match(ReturnableOptionMatcher<_Elem, _Result> aMatcher);
+
+    /**
      * nullではない、何らかの値を保持していることを表します。
      *
      * @param <_E>
@@ -103,6 +113,12 @@ public abstract class Option<_Elem> {
         public void match(OptionMatcher<_E> aMatcher) {
             aMatcher.matchSome(mElement);
         }
+
+        @Override
+        public <_Result> _Result match(ReturnableOptionMatcher<_E, _Result> aMatcher) {
+            return aMatcher.matchSome(mElement);
+        }
+
 
         @Override
         public boolean isNone() {
@@ -145,6 +161,11 @@ public abstract class Option<_Elem> {
         @Override
         public void match(OptionMatcher<_E> aMatcher) {
             aMatcher.matchNone();
+        }
+
+        @Override
+        public <_Result> _Result match(ReturnableOptionMatcher<_E, _Result> aMatcher) {
+            return aMatcher.matchNone();
         }
 
         @Override
