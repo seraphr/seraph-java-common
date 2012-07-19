@@ -92,6 +92,9 @@ public abstract class Option<_Elem> {
      */
     public abstract <_Result> _Result match(ReturnableOptionMatcher<_Elem, _Result> aMatcher);
 
+
+    public abstract <_Dest> Option<_Dest> map(Converter<_Elem, _Dest> aFunc);
+
     /**
      * nullではない、何らかの値を保持していることを表します。
      *
@@ -119,6 +122,13 @@ public abstract class Option<_Elem> {
             return aMatcher.matchSome(mElement);
         }
 
+        /**
+         * @see jp.seraphr.common.Option#map(jp.seraphr.common.Converter)
+         */
+        @Override
+        public <_Dest> Option<_Dest> map(Converter<_E, _Dest> aFunc) {
+            return some(aFunc.convert(getOrNull()));
+        }
 
         @Override
         public boolean isNone() {
@@ -166,6 +176,14 @@ public abstract class Option<_Elem> {
         @Override
         public <_Result> _Result match(ReturnableOptionMatcher<_E, _Result> aMatcher) {
             return aMatcher.matchNone();
+        }
+
+        /**
+         * @see jp.seraphr.common.Option#map(jp.seraphr.common.Converter)
+         */
+        @Override
+        public <_Dest> Option<_Dest> map(Converter<_E, _Dest> aFunc) {
+            return none();
         }
 
         @Override
