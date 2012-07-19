@@ -56,4 +56,45 @@ public class OptionTest {
             }
         });
     }
+
+    @Test
+    public void testNoneWithReturnableMatcher(){
+        Option<Integer> tNone = Option.none();
+
+        Integer tResult = tNone.match(new ReturnableOptionMatcher<Integer, Integer>() {
+
+            @Override
+            public Integer matchSome(Integer aElem) {
+                return 1;
+            }
+
+            @Override
+            public Integer matchNone() {
+                return 0;
+            }
+        });
+
+        assertThat(tResult, is(equalTo(0)));
+    }
+
+    @Test
+    public void testSomeWithReturnableMatcher(){
+        Option<String> tSome = Option.some("abcd");
+
+        String tResult = tSome.match(new ReturnableOptionMatcher<String, String>() {
+
+            @Override
+            public String matchSome(String aElem) {
+                return aElem;
+            }
+
+            @Override
+            public String matchNone() {
+                return "none";
+            }
+        });
+
+        assertThat(tResult, is(equalTo("abcd")));
+
+    }
 }
