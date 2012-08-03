@@ -25,7 +25,7 @@ Maven
 		<dependency>
 			<groupId>jp.seraphr</groupId>
 			<artifactId>seraph-java-common</artifactId>
-			<version>0.6</version>
+			<version>0.7</version>
 		</dependency>
 	</dependencies>
 ```
