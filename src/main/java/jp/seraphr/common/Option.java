@@ -95,6 +95,8 @@ public abstract class Option<_Elem> {
 
     public abstract <_Dest> Option<_Dest> map(Converter<_Elem, _Dest> aFunc);
 
+    public abstract <_Dest> Option<_Dest> flatMap(Converter<_Elem, Option<_Dest>> aFunc);
+
     /**
      * nullではない、何らかの値を保持していることを表します。
      *
@@ -128,6 +130,15 @@ public abstract class Option<_Elem> {
         @Override
         public <_Dest> Option<_Dest> map(Converter<_E, _Dest> aFunc) {
             return some(aFunc.convert(getOrNull()));
+        }
+
+        /**
+         *
+         * @see jp.seraphr.common.Option#flatMap(jp.seraphr.common.Converter)
+         */
+        @Override
+        public <_Dest> Option<_Dest> flatMap(Converter<_E, Option<_Dest>> aFunc) {
+            return aFunc.convert(getOrNull());
         }
 
         @Override
@@ -183,6 +194,14 @@ public abstract class Option<_Elem> {
          */
         @Override
         public <_Dest> Option<_Dest> map(Converter<_E, _Dest> aFunc) {
+            return none();
+        }
+
+        /**
+         * @see jp.seraphr.common.Option#flatMap(jp.seraphr.common.Converter)
+         */
+        @Override
+        public <_Dest> Option<_Dest> flatMap(Converter<_E, Option<_Dest>> aFunc) {
             return none();
         }
 

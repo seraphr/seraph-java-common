@@ -123,6 +123,32 @@ public class OptionTest {
         });
 
         assertThat(tResult, is(equalTo(Option.some("abcdabcd"))));
+    }
 
+    @Test
+    public void testNoneWithFlatMap(){
+        Option<Integer> tNone = Option.none();
+
+        Option<String> tResult = tNone.flatMap(new Converter<Integer, Option<String>>(){
+            @Override
+            public Option<String> convert(Integer aSource) {
+                return Option.some(aSource.toString());
+            }
+        });
+        assertThat(tResult, is(equalTo(Option.<String>none())));
+    }
+
+    @Test
+    public void testSomeWithFlatMap(){
+        Option<String> tSome = Option.some("abcd");
+
+        Option<String> tResult = tSome.flatMap(new Converter<String, Option<String>>(){
+            @Override
+            public Option<String> convert(String aSource) {
+                return Option.some(aSource + aSource);
+            }
+        });
+
+        assertThat(tResult, is(equalTo(Option.some("abcdabcd"))));
     }
 }
