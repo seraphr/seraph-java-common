@@ -92,9 +92,22 @@ public abstract class Option<_Elem> {
      */
     public abstract <_Result> _Result match(ReturnableOptionMatcher<_Elem, _Result> aMatcher);
 
-
+    /**
+     * このオブジェクトがNoneであればNoneを返します。
+     * このオブジェクトがSomeであれば、中身をaFuncによって変換したSomeを返します。
+     *
+     * @param aFunc 変換関数
+     * @return aFuncによって変換されたOption
+     */
     public abstract <_Dest> Option<_Dest> map(Converter<_Elem, _Dest> aFunc);
 
+    /**
+     * このオブジェクトがNoneであればNoneを返します。
+     * このオブジェクトがSomeであれば、中身に対しaFuncを適用して、適用結果を返します。
+     *
+     * @param aFunc 変換関数
+     * @return aFuncによって変換されたOption
+     */
     public abstract <_Dest> Option<_Dest> flatMap(Converter<_Elem, Option<_Dest>> aFunc);
 
     /**
