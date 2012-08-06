@@ -18,11 +18,11 @@ public abstract class Option<_Elem> {
      *            元となるオブジェクト
      * @return aElementに対応したOptionのインスタンス
      */
-    public static <_E> Option<_E> some(_E aElement) {
+    public static <_R ,_E extends _R> Option<_R> some(_E aElement) {
         if (aElement == null)
             return none();
         else
-            return new Some<_E>(aElement);
+            return new Some<_R>(aElement);
     }
 
     /**
