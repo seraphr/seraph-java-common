@@ -122,7 +122,9 @@ public class OptionTest {
             }
         });
 
-        assertThat(tResult, is(equalTo(Option.some("abcdabcd"))));
+        Option<String> tExpected = Option.some("abcdabcd");
+
+        assertThat(tResult, is(equalTo(tExpected)));
     }
 
     @Test
@@ -149,6 +151,7 @@ public class OptionTest {
             }
         });
 
-        assertThat(tResult, is(equalTo(Option.some("abcdabcd"))));
+        Option<String> tExpected = Option.some("abcdabcd");
+        assertThat(tResult, is(equalTo(tExpected)));
     }
 }

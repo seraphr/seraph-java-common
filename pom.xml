@@ -46,6 +46,26 @@
 			</plugins>
 		</pluginManagement>
 		<plugins>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<executable>javac</executable>
+					<!-- optional -->
+					<arguments>
+						<argument>-version</argument>
+					</arguments>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>net.alchim31.maven</groupId>
 				<artifactId>scala-maven-plugin</artifactId>
@@ -64,6 +84,10 @@
 					<encoding>UTF-8</encoding>
 					<source>1.6</source>
 					<target>1.6</target>
+					<compilerArguments>
+						<J-version />
+					</compilerArguments>
+
 				</configuration>
 			</plugin>
 			<plugin>
