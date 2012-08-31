@@ -1,13 +1,19 @@
 package jp.seraphr.common;
 
+import java.io.Serializable;
+
 /**
  * 値を持たない可能性がある型を表します。 値を持たない場合、{@linkplain None}型のインスタンスでそれを表します。
  *
  * @param <_Elem>
  *            値の型
  */
-public abstract class Option<_Elem> {
+public abstract class Option<_Elem> implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     private static None<?> NONE = new None<Object>();
 
     /**
@@ -116,6 +122,11 @@ public abstract class Option<_Elem> {
      * @param <_E>
      */
     private static class Some<_E> extends Option<_E> {
+        /**
+         *
+         */
+        private static final long serialVersionUID = 1L;
+
         public Some(_E aElement) {
             mElement = aElement;
         }
@@ -186,6 +197,11 @@ public abstract class Option<_Elem> {
      * @param <_E>
      */
     private static class None<_E> extends Option<_E> {
+
+        /**
+         *
+         */
+        private static final long serialVersionUID = 1L;
 
         @Override
         public _E getOrElse(_E aElse) {

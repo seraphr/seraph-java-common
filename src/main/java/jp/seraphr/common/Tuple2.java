@@ -1,5 +1,7 @@
 package jp.seraphr.common;
 
+import java.io.Serializable;
+
 /**
  * 2つの値の組み合わせを表します。
  *
@@ -8,7 +10,8 @@ package jp.seraphr.common;
  * @param <_Element2>
  *            二つ目の値の型
  */
-public class Tuple2<_Element1, _Element2> {
+public class Tuple2<_Element1, _Element2> implements Serializable {
+
     public Tuple2(_Element1 aElement1, _Element2 aElement2) {
         mElement1 = aElement1;
         mElement2 = aElement2;
@@ -25,6 +28,10 @@ public class Tuple2<_Element1, _Element2> {
         return new Tuple2<_E1, _E2>(aElement1, aElement2);
     }
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     private _Element1 mElement1;
     private _Element2 mElement2;
 

@@ -1,13 +1,18 @@
 package jp.seraphr.common;
 
+import java.io.Serializable;
+
 /**
  * 3つの値の組み合わせを表します。
  *
- * @param <_E1> 一つ目の値の型
- * @param <_E2> 二つ目の値の型
- * @param <_E3> ３つ目の値の型
+ * @param <_E1>
+ *            一つ目の値の型
+ * @param <_E2>
+ *            二つ目の値の型
+ * @param <_E3>
+ *            ３つ目の値の型
  */
-public class Tuple3<_E1, _E2, _E3> {
+public class Tuple3<_E1, _E2, _E3> implements Serializable {
     public Tuple3(_E1 aE1, _E2 aE2, _E3 aE3) {
         super();
         mE1 = aE1;
@@ -19,6 +24,10 @@ public class Tuple3<_E1, _E2, _E3> {
         return new Tuple3<_El1, _El2, _El3>(aE1, aE2, aE3);
     }
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     private _E1 mE1;
     private _E2 mE2;
     private _E3 mE3;
