@@ -1,6 +1,8 @@
 package jp.seraphr.common;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.Iterator;
 
 /**
  * 値を持たない可能性がある型を表します。 値を持たない場合、{@linkplain None}型のインスタンスでそれを表します。
@@ -8,7 +10,7 @@ import java.io.Serializable;
  * @param <_Elem>
  *            値の型
  */
-public abstract class Option<_Elem> implements Serializable {
+public abstract class Option<_Elem> implements Serializable, Iterable<_Elem> {
 
     /**
      *
@@ -171,6 +173,28 @@ public abstract class Option<_Elem> implements Serializable {
         }
 
         @Override
+        public Iterator<_E> iterator() {
+            return new Iterator<_E>() {
+                private boolean mHasNext = true;
+
+                @Override
+                public boolean hasNext() {
+                    return mHasNext;
+                }
+
+                @Override
+                public _E next() {
+                    return mElement;
+                }
+
+                @Override
+                public void remove() {
+                    throw new UnsupportedOperationException();
+                }
+            };
+        }
+
+        @Override
         public int hashCode() {
             return getOrNull().hashCode();
         }
@@ -242,6 +266,11 @@ public abstract class Option<_Elem> implements Serializable {
         @Override
         public String toString() {
             return "None";
+        }
+
+        @Override
+        public Iterator<_E> iterator() {
+            return Collections.<_E>emptyList().iterator();
         }
     }
 }
