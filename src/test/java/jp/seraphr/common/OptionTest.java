@@ -1,8 +1,10 @@
 package jp.seraphr.common;
 
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-import static org.hamcrest.CoreMatchers.*;
+import java.util.Iterator;
+
 import org.junit.Test;
 
 public class OptionTest {
@@ -12,6 +14,7 @@ public class OptionTest {
 
         assertThat(tNone.getOrNull(), is(nullValue()));
         assertThat(tNone.getOrElse(10), is(equalTo(10)));
+        assertThat(tNone.iterator().hasNext(), is(equalTo(false)));
     }
 
     @Test
@@ -20,6 +23,11 @@ public class OptionTest {
 
         assertThat(tSome.getOrNull(), is(equalTo(20)));
         assertThat(tSome.getOrElse(10), is(equalTo(20)));
+
+        Iterator<Integer> tItr = tSome.iterator();
+        assertThat(tItr.hasNext(), is(equalTo(true)));
+        assertThat(tItr.next(), is(equalTo(20)));
+        assertThat(tItr.hasNext(), is(equalTo(true)));
     }
 
     @Test
