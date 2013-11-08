@@ -102,7 +102,7 @@ public class OptionTest {
     public void testNoneWithMap(){
         Option<Integer> tNone = Option.none();
 
-        Option<String> tResult = tNone.map(new Converter<Integer, String>() {
+        Option<String> tResult = tNone.map(new Function<Integer, String>() {
             @Override
             public String convert(Integer aSource) {
                 return aSource.toString();
@@ -115,7 +115,7 @@ public class OptionTest {
     public void testSomeWithMap(){
         Option<String> tSome = Option.some("abcd");
 
-        Option<String> tResult = tSome.map(new Converter<String, String>(){
+        Option<String> tResult = tSome.map(new Function<String, String>(){
             @Override
             public String convert(String aSource) {
                 return aSource + aSource;
@@ -131,7 +131,7 @@ public class OptionTest {
     public void testNoneWithFlatMap(){
         Option<Integer> tNone = Option.none();
 
-        Option<String> tResult = tNone.flatMap(new Converter<Integer, Option<String>>(){
+        Option<String> tResult = tNone.flatMap(new Function<Integer, Option<String>>(){
             @Override
             public Option<String> convert(Integer aSource) {
                 return Option.some(aSource.toString());
@@ -144,7 +144,7 @@ public class OptionTest {
     public void testSomeWithFlatMap(){
         Option<String> tSome = Option.some("abcd");
 
-        Option<String> tResult = tSome.flatMap(new Converter<String, Option<String>>(){
+        Option<String> tResult = tSome.flatMap(new Function<String, Option<String>>(){
             @Override
             public Option<String> convert(String aSource) {
                 return Option.some(aSource + aSource);

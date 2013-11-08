@@ -7,6 +7,6 @@ package jp.seraphr.common;
  * @param <_Arg2> 第二引数型
  * @param <_Dest> 結果型
  */
-public interface Converter2<_Arg1, _Arg2, _Dest> {
+public interface Function2<_Arg1, _Arg2, _Dest> {
     public _Dest convert(_Arg1 aArg1, _Arg2 aArg2);
 }

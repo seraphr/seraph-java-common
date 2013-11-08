@@ -105,7 +105,7 @@ public abstract class Option<_Elem> implements Serializable {
      * @param aFunc 変換関数
      * @return aFuncによって変換されたOption
      */
-    public abstract <_Dest> Option<_Dest> map(Converter<_Elem, _Dest> aFunc);
+    public abstract <_Dest> Option<_Dest> map(Function<_Elem, _Dest> aFunc);
 
     /**
      * このオブジェクトがNoneであればNoneを返します。
@@ -114,7 +114,7 @@ public abstract class Option<_Elem> implements Serializable {
      * @param aFunc 変換関数
      * @return aFuncによって変換されたOption
      */
-    public abstract <_Dest> Option<_Dest> flatMap(Converter<_Elem, Option<_Dest>> aFunc);
+    public abstract <_Dest> Option<_Dest> flatMap(Function<_Elem, Option<_Dest>> aFunc);
 
     /**
      * nullではない、何らかの値を保持していることを表します。
@@ -149,19 +149,19 @@ public abstract class Option<_Elem> implements Serializable {
         }
 
         /**
-         * @see jp.seraphr.common.Option#map(jp.seraphr.common.Converter)
+         * @see jp.seraphr.common.Option#map(jp.seraphr.common.Function)
          */
         @Override
-        public <_Dest> Option<_Dest> map(Converter<_E, _Dest> aFunc) {
+        public <_Dest> Option<_Dest> map(Function<_E, _Dest> aFunc) {
             return some(aFunc.convert(getOrNull()));
         }
 
         /**
          *
-         * @see jp.seraphr.common.Option#flatMap(jp.seraphr.common.Converter)
+         * @see jp.seraphr.common.Option#flatMap(jp.seraphr.common.Function)
          */
         @Override
-        public <_Dest> Option<_Dest> flatMap(Converter<_E, Option<_Dest>> aFunc) {
+        public <_Dest> Option<_Dest> flatMap(Function<_E, Option<_Dest>> aFunc) {
             return aFunc.convert(getOrNull());
         }
 
@@ -219,18 +219,18 @@ public abstract class Option<_Elem> implements Serializable {
         }
 
         /**
-         * @see jp.seraphr.common.Option#map(jp.seraphr.common.Converter)
+         * @see jp.seraphr.common.Option#map(jp.seraphr.common.Function)
          */
         @Override
-        public <_Dest> Option<_Dest> map(Converter<_E, _Dest> aFunc) {
+        public <_Dest> Option<_Dest> map(Function<_E, _Dest> aFunc) {
             return none();
         }
 
         /**
-         * @see jp.seraphr.common.Option#flatMap(jp.seraphr.common.Converter)
+         * @see jp.seraphr.common.Option#flatMap(jp.seraphr.common.Function)
          */
         @Override
-        public <_Dest> Option<_Dest> flatMap(Converter<_E, Option<_Dest>> aFunc) {
+        public <_Dest> Option<_Dest> flatMap(Function<_E, Option<_Dest>> aFunc) {
             return none();
         }
 
