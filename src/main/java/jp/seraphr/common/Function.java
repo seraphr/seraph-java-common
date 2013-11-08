@@ -12,5 +12,5 @@ public interface Function<_Source, _Dest> {
      * @param aSource 変換元オブジェクト
      * @return 変換済みオブジェクト
      */
-    public _Dest convert(_Source aSource);
+    public _Dest apply(_Source aSource);
 }

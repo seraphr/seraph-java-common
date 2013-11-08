@@ -15,7 +15,7 @@ public class IdFunction<_T> implements Function<_T, _T> {
     }
 
     @Override
-    public _T convert(_T aSource) {
+    public _T apply(_T aSource) {
         return aSource;
     }
 }

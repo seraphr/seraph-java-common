@@ -8,5 +8,5 @@ package jp.seraphr.common;
  * @param <_Dest> 結果型
  */
 public interface Function2<_Arg1, _Arg2, _Dest> {
-    public _Dest convert(_Arg1 aArg1, _Arg2 aArg2);
+    public _Dest apply(_Arg1 aArg1, _Arg2 aArg2);
 }

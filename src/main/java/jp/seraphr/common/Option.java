@@ -155,7 +155,7 @@ public abstract class Option<_Elem> implements Serializable, Iterable<_Elem> {
          */
         @Override
         public <_Dest> Option<_Dest> map(Function<_E, _Dest> aFunc) {
-            return some(aFunc.convert(getOrNull()));
+            return some(aFunc.apply(getOrNull()));
         }
 
         /**
@@ -164,7 +164,7 @@ public abstract class Option<_Elem> implements Serializable, Iterable<_Elem> {
          */
         @Override
         public <_Dest> Option<_Dest> flatMap(Function<_E, Option<_Dest>> aFunc) {
-            return aFunc.convert(getOrNull());
+            return aFunc.apply(getOrNull());
         }
 
         @Override

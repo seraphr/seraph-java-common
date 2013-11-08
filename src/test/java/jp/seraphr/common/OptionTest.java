@@ -112,7 +112,7 @@ public class OptionTest {
 
         Option<String> tResult = tNone.map(new Function<Integer, String>() {
             @Override
-            public String convert(Integer aSource) {
+            public String apply(Integer aSource) {
                 return aSource.toString();
             }
         });
@@ -125,7 +125,7 @@ public class OptionTest {
 
         Option<String> tResult = tSome.map(new Function<String, String>(){
             @Override
-            public String convert(String aSource) {
+            public String apply(String aSource) {
                 return aSource + aSource;
             }
         });
@@ -141,7 +141,7 @@ public class OptionTest {
 
         Option<String> tResult = tNone.flatMap(new Function<Integer, Option<String>>(){
             @Override
-            public Option<String> convert(Integer aSource) {
+            public Option<String> apply(Integer aSource) {
                 return Option.some(aSource.toString());
             }
         });
@@ -154,7 +154,7 @@ public class OptionTest {
 
         Option<String> tResult = tSome.flatMap(new Function<String, Option<String>>(){
             @Override
-            public Option<String> convert(String aSource) {
+            public Option<String> apply(String aSource) {
                 return Option.some(aSource + aSource);
             }
         });
